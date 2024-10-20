@@ -29,6 +29,15 @@
                     <main class="mt-6">
                         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                             <div class="col-span-1 mx-auto">
+                                @if($errors->any())
+                                <div class="error-messages">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
                                 <h2 class="text-2xl font-semibold mb-4">Please login</h2>
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf

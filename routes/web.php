@@ -2,11 +2,15 @@
 
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    $token = session('sanctum_token');
-    if(!empty($token)) return view('welcome');
+Route::middleware(['web'])->get('/', function () {
+    if(Auth::check()) return view('welcome');
     return view('login');
+})->name('/');
+
+Route::middleware(['auth:sanctum'])->group(function(){
+    Route::get('logout', [RegisterController::class, 'logout'])->name('logout');
 });
 
 Route::controller(RegisterController::class)->group(function(){
