@@ -29,7 +29,7 @@ class RegisterController extends Controller
      */
     public function login(Request $request)
     {
-        $response = HTTP::timeout(120)->post(env('API_URL') . '/login', 
+        $response = HTTP::timeout(60)->post(env('API_URL') . '/login', 
         ['email' => $request->email,
                 'password' => $request->password]);
         $data = $response->json('data')??[];
