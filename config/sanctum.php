@@ -78,6 +78,7 @@ return [
         'authenticate_session' => Laravel\Sanctum\Http\Middleware\AuthenticateSession::class,
         'encrypt_cookies' => Illuminate\Cookie\Middleware\EncryptCookies::class,
         'validate_csrf_token' => Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class,
+        'ensure_stateful_requests' => Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
     ],
 
 ];
