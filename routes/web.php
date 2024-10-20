@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    if(Auth::check()) return view('welcome');
+    $token = session('sanctum_token');
+    if(!empty($token)) return view('welcome');
     return view('login');
 });
 
