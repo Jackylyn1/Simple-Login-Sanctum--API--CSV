@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class RegisterController extends Controller
 {
@@ -16,10 +13,12 @@ class RegisterController extends Controller
      */
     public function logout(Request $request)
     {
+        $response = HTTP::withToken(session('sanctum_token'))->timeout(60)->post(env('API_URL') . '/logout', 
+        []);
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         auth()->guard('web')->logout();
-        return redirect()->route('/');
+        return back()->with('message', $response->json('message')??'');
     }
     
     /**
@@ -32,14 +31,8 @@ class RegisterController extends Controller
         $response = HTTP::timeout(60)->post(env('API_URL') . '/login', 
         ['email' => $request->email,
                 'password' => $request->password]);
-        $data = $response->json('data')??[];
-        $data['message'] = $response->json('message')??'';
-        if(true !== $response->json('success')) return back()->withErrors($data);
-        $user = User::where('email', $request->email)->first();
-        if($user){
-            Auth::login($user);
-        }
-        session(['sanctum_token' => $data['token']]);
-        return back()->with('data', $data);
+        if(true !== $response->json('success')) return back()->withErrors([$response->json('message')]);
+        session(['sanctum_token' => $response->json('data')['token']]);
+        return back()->with('message', $response->json('message')??'');
     }
 }

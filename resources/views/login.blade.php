@@ -38,14 +38,10 @@
                                     </ul>
                                 </div>
                                 @endif
-                                @php
-                                    $data = session('data')??[];
-                                    $message = $data['message']??'';
-                                @endphp
-                                @if(!empty($message))
+                                @if(!empty(session('message')))
                                 <div class="success-messages mx-auto text-center">
                                     <ul>
-                                        <li>{{ $message }}</li>
+                                        <li>{{ session('message') }}</li>
                                     </ul>
                                 </div>
                                 @endif
