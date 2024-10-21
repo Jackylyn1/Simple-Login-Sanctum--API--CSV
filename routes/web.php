@@ -14,8 +14,8 @@ Route::middleware(['check.sanctum.token'])->group(function(){
     })->name('home');
 
     Route::controller(CSVImportController::class)->group(function(){
-        Route::get('import', 'loadForm')->name('import.csv.form');
-        Route::post('import','upload')->name('import.csv.upload');
+        Route::get('import-csv', 'loadForm')->name('import.csv.form');
+        Route::post('import-csv','upload')->name('import.csv.upload');
     });
 });
 

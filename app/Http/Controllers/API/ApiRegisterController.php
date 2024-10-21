@@ -2,55 +2,21 @@
 
 namespace App\Http\Controllers\API;
 use Illuminate\Support\Facades\Auth;
+use Response;
 use Validator;
-use App\Http\Controllers\Controller;
 use Laravel\Sanctum\PersonalAccessToken;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ApiRegisterController extends Controller
+class ApiRegisterController extends BaseController
 {
-    /**
-     * success response method.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function sendResponse(string $message, array $result): JsonResponse
-    {
-        return $this->sendStandardResponse($message, $result, 200);
-    }
-  
-    /**
-     * return error response.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function sendError (string $error, array $errorMessages = [], $code = 404):JsonResponse
-    {       
-        return $this->sendStandardResponse($error, $errorMessages, $code);
-    }
-
-    /**
-     * return standard response.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    private function sendStandardResponse(string $message, array $result, int $code):JsonResponse
-    {
-        $response = [
-            'success' => (($code == 200)?true:false),
-            'message' => $message,
-        ];
-        $response['data'] = $result??[];  
-        return response()->json($response, $code);
-    }
 
     /**
      * Logout in Backend
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response | \Illuminate\Http\JsonResponse
      */
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse | Response
     {
         $token = str_replace('Bearer ', '', $request->header('Authorization'));
         $tokenModel = PersonalAccessToken::findToken($token);
@@ -63,9 +29,9 @@ class ApiRegisterController extends Controller
     /**
      * Login API
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response | \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request):JsonResponse
+    public function login(Request $request): JsonResponse | Response
     {
         $validator = Validator::make($request->all(), [
             'password' => 'required',
