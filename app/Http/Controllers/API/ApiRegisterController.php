@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 use Illuminate\Support\Facades\Auth;
 use Response;
 use Validator;
-use Laravel\Sanctum\PersonalAccessToken;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -14,13 +13,12 @@ class ApiRegisterController extends BaseController
     /**
      * Logout in Backend
      *
+     * @param  \Illuminate\Http\Request
      * @return \Illuminate\Http\Response | \Illuminate\Http\JsonResponse
      */
     public function logout(Request $request): JsonResponse | Response
     {
-        $token = str_replace('Bearer ', '', $request->header('Authorization'));
-        $tokenModel = PersonalAccessToken::findToken($token);
-
+        $tokenModel = $this->getPersonalToken($request);
         if(empty($tokenModel)) $this->sendError('Token not found');
         $tokenModel->delete();
         return $this->sendResponse('You logged out successfully.', []);
@@ -39,7 +37,7 @@ class ApiRegisterController extends BaseController
         ]);
         
         if($validator->fails()){
-            return $this->sendError('validation faied', $validator->errors()->toArray());
+            return $this->sendError('validation failed', $validator->errors()->toArray());
         }
 
         if(Auth::attempt(['email'=> $request->email,'password'=> $request->password])){
