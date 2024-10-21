@@ -33,13 +33,13 @@ class RegisterController extends Controller
         ['email' => $request->email,
                 'password' => $request->password]);
         $data = $response->json('data')??[];
-        array_push($data, $response->json('message'));
+        $data['message'] = $response->json('message')??'';
         if(true !== $response->json('success')) return back()->withErrors($data);
         $user = User::where('email', $request->email)->first();
         if($user){
             Auth::login($user);
         }
         session(['sanctum_token' => $data['token']]);
-        return back();
+        return back()->with('data', $data);
     }
 }

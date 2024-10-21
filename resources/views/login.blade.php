@@ -38,6 +38,17 @@
                                     </ul>
                                 </div>
                                 @endif
+                                @php
+                                    $data = session('data')??[];
+                                    $message = $data['message']??'';
+                                @endphp
+                                @if(!empty($message))
+                                <div class="success-messages mx-auto text-center">
+                                    <ul>
+                                        <li>{{ $message }}</li>
+                                    </ul>
+                                </div>
+                                @endif
                                 <h2 class="text-2xl font-semibold mb-4">Please login</h2>
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf

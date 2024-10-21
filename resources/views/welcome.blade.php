@@ -37,6 +37,17 @@
                     </header>
 
                     <main class="mt-6">
+                        @php
+                            $data = session('data')??[];
+                            $message = $data['message']??'';
+                        @endphp
+                        @if(!empty($message))
+                        <div class="success-messages mx-auto text-center">
+                            <ul>
+                                <li>{{ $message }}</li>
+                            </ul>
+                        </div>
+                        @endif
                         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                             <a
                                 href="https://laravel.com/docs"
