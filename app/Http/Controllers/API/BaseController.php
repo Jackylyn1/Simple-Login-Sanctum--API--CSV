@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller as Controller;
 use Illuminate\Http\JsonResponse;
-use Request;
+use Illuminate\Http\Request;
 use Laravel\Sanctum\PersonalAccessToken;
   
 class BaseController extends Controller
