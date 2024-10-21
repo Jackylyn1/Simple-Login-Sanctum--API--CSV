@@ -32,3 +32,4 @@ To run Naruto RPG we recommend your host supports:
 1. run php artisan migrate
 2. run php artisan db:seed
 3. get password of seeded user from laravel.log there will be an entry, which looks like "local.INFO: Password for [...]"
+4. you can use the .csv files inside testdata/ to have an example of the needed structure
