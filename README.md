@@ -29,5 +29,6 @@ To run Naruto RPG we recommend your host supports:
 6. run docker run -d --name laravelAPI -p 8001:8000 --env DB_HOST=mariadb --env DB_PORT=3306 --env DB_USERNAME=bn_myapp --env DB_DATABASE=bitnami_myapp  --network laravel-network --volume [project path on local machine for bin-mount]:/app bitnami/laravel:latest
 
 ### Testing ###
-1. run php artisan db:seed
-2. get password of seeded user from laravel.log there will be an entry, which looks like "local.INFO: Password for [...]"
+1. run php artisan migrate
+2. run php artisan db:seed
+3. get password of seeded user from laravel.log there will be an entry, which looks like "local.INFO: Password for [...]"
