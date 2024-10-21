@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CSVImportController;
 
 
 Route::middleware(['check.sanctum.token'])->group(function(){
@@ -11,6 +12,11 @@ Route::middleware(['check.sanctum.token'])->group(function(){
     Route::get('/', function () {
         return view('welcome');
     })->name('home');
+
+    Route::controller(CSVImportController::class)->group(function(){
+        Route::get('import', 'loadForm')->name('import.csv.form');
+        Route::post('import','upload')->name('import.csv.upload');
+    });
 });
 
 Route::controller(RegisterController::class)->group(function(){

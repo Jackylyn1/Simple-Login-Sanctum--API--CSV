@@ -9,7 +9,8 @@ class RegisterController extends Controller
     /**
      * Logout in Frontend
      *
-     * @return \Illuminate\Http\RedirectResponse | bool;
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse;
      */
     public function logout(Request $request)
     {
@@ -24,7 +25,8 @@ class RegisterController extends Controller
     /**
      * Login with API-call
      *
-     * @return \Illuminate\Http\RedirectResponse | bool;
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse;
      */
     public function login(Request $request)
     {
