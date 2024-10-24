@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Response;
-use Validator;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\JsonResponse;
 
 class ApiRegisterController extends BaseController

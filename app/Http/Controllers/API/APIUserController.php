@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Response;
+use Illuminate\Http\Response;
 class APIUserController extends BaseController
 {
     /**
