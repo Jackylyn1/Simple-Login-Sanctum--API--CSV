@@ -4,11 +4,10 @@
 
 ### Server Requirements
 
-To run Naruto RPG we recommend your host supports:
+To run the Application we recommend your host supports:
 
 * PHP version 8.3 or greater.
 * MariaDB version 10.6 or greater.
-* HTTPS support
 
 #### Required PHP extensions
 
@@ -25,8 +24,8 @@ To run Naruto RPG we recommend your host supports:
 2. run "docker network create laravel-network"
 3. run "docker volume create --name mariadb_data"
 4. run "docker run -d --name mariadb --env ALLOW_EMPTY_PASSWORD=yes --env MARIADB_USER=bn_myapp --env MARIADB_DATABASE=bitnami_myapp --network laravel-network --volume mariadb_data:/bitnami/mariadb bitnami/mariadb:latest"
-5. run docker run -d --name laravel -p 8000:8000 --env DB_HOST=mariadb --env DB_PORT=3306 --env DB_USERNAME=bn_myapp --env DB_DATABASE=bitnami_myapp  --network laravel-network --volume [project path on local for bin-mount]:/app bitnami/laravel:latest
-6. run docker run -d --name laravelAPI -p 8001:8000 --env DB_HOST=mariadb --env DB_PORT=3306 --env DB_USERNAME=bn_myapp --env DB_DATABASE=bitnami_myapp  --network laravel-network --volume [project path on local machine for bin-mount]:/app bitnami/laravel:latest
+5. run "docker run -d --name laravel -p 8000:8000 --env DB_HOST=mariadb --env DB_PORT=3306 --env DB_USERNAME=bn_myapp --env DB_DATABASE=bitnami_myapp  --network laravel-network --volume [project path on local for bind-mount]:/app bitnami/laravel:latest"
+6. run "docker run -d --name laravelAPI -p 8001:8000 --env DB_HOST=mariadb --env DB_PORT=3306 --env DB_USERNAME=bn_myapp --env DB_DATABASE=bitnami_myapp  --network laravel-network --volume [project path on local machine for bind-mount]:/app bitnami/laravel:latest"
 
 ### Testing ###
 1. run php artisan migrate
