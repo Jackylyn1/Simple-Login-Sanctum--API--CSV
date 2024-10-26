@@ -3,15 +3,15 @@
 ## about
 This project is: a showcase of ideas, a playground, and a gathering point for new technologies. Here, I’m experimenting, tinkering, and more. There’s no fixed development goal—feel free to throw ideas, feedback, and anything else my way!
 
+Some additional information:
+- I know that curl-requests are incredibly slow sometimes, I used them because one of my goals was to use Laravel
+
 To-Do
-- delete test.txt
-- separate login-controller
-- redirect to / after logout
+- move tailwind-codes to an external file
 - remove base Controller, add helpers instead
 - add services
 - add automated tests
 - add registration
-
 - add Facebook-, Google- and GitHub-Login
 - add 2fa
 

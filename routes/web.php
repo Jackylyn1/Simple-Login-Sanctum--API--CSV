@@ -5,6 +5,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CSVImportController;
 
 
+
+Route::get('/', function () {
+    return view('login');
+})->name('/');
+
+Route::controller(LoginController::class)->group(function(){
+    Route::post('login','login')->name('login');
+    Route::get('login',function(){
+        return redirect()->route('/');
+    })->name('login');
+});
+
 Route::middleware(['check.sanctum.token'])->group(function(){
     Route::controller(LoginController::class)->group(function(){
         Route::get('logout', 'logout')->name('logout');
@@ -17,11 +29,4 @@ Route::middleware(['check.sanctum.token'])->group(function(){
         Route::get('import-csv', 'loadForm')->name('import.csv.form');
         Route::post('import-csv','upload')->name('import.csv.upload');
     });
-});
-
-Route::controller(LoginController::class)->group(function(){
-    Route::post('login','login')->name('login');
-    Route::get('login',function(){
-        return redirect()->route('/');
-    })->name('login');
 });
