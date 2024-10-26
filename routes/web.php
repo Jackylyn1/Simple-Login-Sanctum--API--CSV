@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CSVImportController;
 
 
 Route::middleware(['check.sanctum.token'])->group(function(){
-    Route::controller(RegisterController::class)->group(function(){
+    Route::controller(LoginController::class)->group(function(){
         Route::get('logout', 'logout')->name('logout');
     });
     Route::get('/', function () {
@@ -19,7 +19,7 @@ Route::middleware(['check.sanctum.token'])->group(function(){
     });
 });
 
-Route::controller(RegisterController::class)->group(function(){
+Route::controller(LoginController::class)->group(function(){
     Route::post('login','login')->name('login');
     Route::get('login',function(){
         return redirect()->route('/');
