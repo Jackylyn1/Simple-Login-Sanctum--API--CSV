@@ -1,5 +1,12 @@
 This project is: a showcase of ideas, a playground, and a gathering point for new technologies. Here, I’m experimenting, tinkering, and more. There’s no fixed development goal—feel free to throw ideas, feedback, and anything else my way!
 
+To-Do
+- add services
+- add automated tests
+- add Facebook-, Google- and GitHub-Login
+- add 2fa
+
+
 # Login with API, Sanctum Authentication and CSV-Import
 
 ## Overview
