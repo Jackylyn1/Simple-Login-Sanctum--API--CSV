@@ -3,7 +3,7 @@ This project is: a showcase of ideas, a playground, and a gathering point for ne
 To-Do
 - delete test.tx- separate login-controller
 - redirect to / after logout
-- rwmove base Controller, add helpers instead
+- remove base Controller, add helpers instead
 - add services
 - add automated tests
 - add registration
