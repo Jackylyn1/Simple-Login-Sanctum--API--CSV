@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\API;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -49,12 +48,10 @@ class ApiLoginController extends Controller
             return $this->responseService->sendError('validation failed', $validator->errors()->toArray());
         }
 
-        if(Auth::attempt(['email'=> $request->email,'password'=> $request->password])){
-            $user = Auth::user();
-            $userdata['token'] = $user->createToken('apiToken')->plainTextToken;
-            $userdata['name'] = $user->name;
-            return $this->responseService->sendResponse($user->name . ' logged in successfully.', $userdata);
+        if($user = $this->sanctumAuthenticationService->login($request)){
+            return $this->responseService->sendResponse($user['name'] . ' logged in successfully.', $user);
         }
         return $this->responseService->sendError('Wrong userdata');
+        
     }
 }

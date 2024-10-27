@@ -2,6 +2,7 @@
 namespace App\Http\Services;
 use Laravel\Sanctum\PersonalAccessToken;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 class SanctumAuthenticationService {
 
     /**
@@ -30,6 +31,24 @@ class SanctumAuthenticationService {
         }
         return false;
     }
+
+     /**
+     * Login with SanctumToken
+     *
+     * @param  \Illuminate\Http\Request
+     * @return array | bool
+     */
+    public function login(Request $request): array | bool
+    {
+        if(Auth::attempt(['email'=> $request->email,'password'=> $request->password])){
+            $user = Auth::user();
+            $userdata['token'] = $user->createToken('apiToken')->plainTextToken;
+            $userdata['name'] = $user->name;
+            return $userdata;
+        }
+        return false;
+    }
+
 
     /**
      * Logout from Sanctum

@@ -13,6 +13,8 @@ To-Do
 - add registration
 - add Facebook-, Google- and GitHub-Login
 - add 2fa
+- make domain driven structure
+- create composer packages (for Login/Registration + for csvimport (maybe fileimport with different types?))
 
 ## Overview
 
