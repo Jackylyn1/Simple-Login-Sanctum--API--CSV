@@ -33,6 +33,7 @@ To run the Application we recommend your host supports:
 ### Requirements
 
 - Docker - [Install](https://docs.docker.com/get-docker/)
+- npm
 
 ### Installation
 1. checkout the repo
@@ -41,6 +42,7 @@ To run the Application we recommend your host supports:
 4. run "docker run -d --name mariadb --env ALLOW_EMPTY_PASSWORD=yes --env MARIADB_USER=bn_myapp --env MARIADB_DATABASE=bitnami_myapp --network laravel-network --volume mariadb_data:/bitnami/mariadb bitnami/mariadb:latest"
 5. run "docker run -d --name laravel -p 8000:8000 --env DB_HOST=mariadb --env DB_PORT=3306 --env DB_USERNAME=bn_myapp --env DB_DATABASE=bitnami_myapp  --network laravel-network --volume [project path on local for bind-mount]:/app bitnami/laravel:latest"
 6. run "docker run -d --name laravelAPI -p 8001:8000 --env DB_HOST=mariadb --env DB_PORT=3306 --env DB_USERNAME=bn_myapp --env DB_DATABASE=bitnami_myapp  --network laravel-network --volume [project path on local machine for bind-mount]:/app bitnami/laravel:latest"
+7. type in cmd "npx mix watch"
 
 ### Testing ###
 1. run php artisan migrate
