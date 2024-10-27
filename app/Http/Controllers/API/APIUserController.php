@@ -26,9 +26,7 @@ class APIUserController extends Controller
      */
     public function getLoggedInUser(Request $request): Response | JsonResponse 
     {
-        $personalAccessToken = $this->sanctumAuthenticationService->getPersonalToken($request);
-        if ($personalAccessToken) {
-            $user = $personalAccessToken->tokenable();
+        if ($user = $this->sanctumAuthenticationService->getLoggedInUser($request)) {
             return $this->responseService->sendResponse('User is authenticated', [$user]);
         }
         return $this->responseService->sendError(error: 'Unauthenticated', code: 401);

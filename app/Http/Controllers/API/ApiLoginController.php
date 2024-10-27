@@ -28,9 +28,8 @@ class ApiLoginController extends Controller
      */
     public function logout(Request $request): JsonResponse | Response
     {
-        $tokenModel = $this->sanctumAuthenticationService->getPersonalToken($request);
-        if(empty($tokenModel)) $this->responseService->sendError('Token not found');
-        $tokenModel->delete();
+        if(!$this->sanctumAuthenticationService->getPersonalToken($request)) 
+            return $this->responseService->sendError('Token not found');
         return $this->responseService->sendResponse('You logged out successfully.', []);
     }
 
