@@ -8,13 +8,16 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ResponseService;
+use App\Http\Services\SanctumAuthenticationService;
 
 class ApiLoginController extends Controller
 {
     protected $responseService;
+    protected $sanctumAuthenticationService;
 
-    public function __construct(ResponseService $responseService){
+    public function __construct(ResponseService $responseService, SanctumAuthenticationService $sanctumAuthenticationService){
         $this->responseService = $responseService;
+        $this->sanctumAuthenticationService = $sanctumAuthenticationService;
     }
 
     /**
@@ -25,10 +28,10 @@ class ApiLoginController extends Controller
      */
     public function logout(Request $request): JsonResponse | Response
     {
-        $tokenModel = $this->getPersonalToken($request);
-        if(empty($tokenModel)) $this->sendError('Token not found');
+        $tokenModel = $this->sanctumAuthenticationService->getPersonalToken($request);
+        if(empty($tokenModel)) $this->responseService->sendError('Token not found');
         $tokenModel->delete();
-        return $this->sendResponse('You logged out successfully.', []);
+        return $this->responseService->sendResponse('You logged out successfully.', []);
     }
 
     /**
@@ -44,7 +47,7 @@ class ApiLoginController extends Controller
         ]);
         
         if($validator->fails()){
-            return $this->sendError('validation failed', $validator->errors()->toArray());
+            return $this->responseService->sendError('validation failed', $validator->errors()->toArray());
         }
 
         if(Auth::attempt(['email'=> $request->email,'password'=> $request->password])){

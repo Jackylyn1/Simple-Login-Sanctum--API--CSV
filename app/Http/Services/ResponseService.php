@@ -2,22 +2,9 @@
   
 namespace App\Http\Services;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Laravel\Sanctum\PersonalAccessToken;
   
 class ResponseService
-{
-    /**
-     * Get Access-Token
-     *
-     * @param  \Illuminate\Http\Request
-     * @return PersonalAccessToken | null
-     */
-    protected function getPersonalToken(Request $request): PersonalAccessToken | null {
-        $token = str_replace('Bearer ', '', $request->header('Authorization'));
-        return PersonalAccessToken::findToken($token);
-    }
-    
+{   
     /**
      * success response method.
      *
