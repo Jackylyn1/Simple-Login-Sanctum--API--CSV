@@ -1,12 +1,11 @@
 <?php
   
-namespace App\Http\Controllers\API;
-use App\Http\Controllers\Controller as Controller;
+namespace App\Http\Services;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\PersonalAccessToken;
   
-class BaseController extends Controller
+class ResponseService
 {
     /**
      * Get Access-Token

@@ -5,8 +5,16 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-class APIUserController extends BaseController
+use App\Http\Controllers\Controller;
+use App\Http\Services\ResponseService;
+class APIUserController extends Controller
 {
+    protected $responseService;
+
+    public function __construct(ResponseService $responseService){
+        $this->responseService = $responseService;
+    }
+    
     /**
      * get User connected to the active token
      *

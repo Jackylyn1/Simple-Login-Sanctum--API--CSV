@@ -1,14 +1,21 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
+use App\Http\Controllers\Controller;
+use App\Http\Services\ResponseService;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use App\Models\Contact;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-class APICSVImportController extends BaseController
+class APICSVImportController extends Controller
 {
+    protected $responseService;
+    public function __construct(ResponseService $responseService)
+    {
+        $this->responseService = $responseService;
+    }
+
     /** 
      * upload CSV
      * 
@@ -34,9 +41,9 @@ class APICSVImportController extends BaseController
                     'phone_number' => $mappedData['phonenumber'] ?? '',
                 ]);
             }
-            return $this->sendResponse('CSV imported successfully.',[]);
+            return $this->responseService->sendResponse('CSV imported successfully.',[]);
         } catch (\Exception $e) {
-            return $this->sendError('Error importing CSV: ' . $e->getMessage());
+            return $this->responseService->sendError('Error importing CSV: ' . $e->getMessage());
         }
     }   
 }
