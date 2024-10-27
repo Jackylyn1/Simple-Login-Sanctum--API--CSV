@@ -1,5 +1,6 @@
 const mix = require('laravel-mix');
 const purgecss = require('@fullhuman/postcss-purgecss');
+
 mix.js('resources/js/app.js', 'public/js')
 .sass('resources/sass/app.scss', 'public/css')
 .options({
@@ -13,4 +14,12 @@ mix.js('resources/js/app.js', 'public/js')
           defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
        })
     ]
+})
+.webpackConfig({
+    stats: {
+        all: false,
+        assets: true,
+        modules: true,
+        usedExports: true
+    }
 });
