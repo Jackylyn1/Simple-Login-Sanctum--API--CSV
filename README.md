@@ -7,7 +7,6 @@ Some additional information:
 - I know that curl-requests are incredibly slow sometimes, I used them because one of my goals was to use Laravel
 
 To-Do
-- add services
 - add automated tests
 - add registration
 - add Facebook-, Google- and GitHub-Login
