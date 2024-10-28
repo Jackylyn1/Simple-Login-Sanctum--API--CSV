@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor
+        configVersion="3"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://www.phpdoc.org"
+>
+    <title>phpDocumentor</title>
+    <paths>
+        <output>storage/phpdocs</output>
+        <cache>storage/cache</cache>
+    </paths>
+    <version number="3.0.0">
+        <api>
+            <source dsn=".">
+                <path>app</path>
+                <path>bootstrap</path>
+                <path>config</path>
+                <path>database</path>
+                <path>routes</path>
+                <path>tests</path>
+            </source>
+        </api>
+    </version>
+
+</phpdocumentor>
