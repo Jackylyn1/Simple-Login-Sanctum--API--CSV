@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Http\Services\SessionAuthenticationService;
 
 class LoginController extends Controller
 {
+    protected $sessionAuthenticationService;
+
+    public function __construct(SessionAuthenticationService $sessionAuthenticationService){
+        $this->sessionAuthenticationService = $sessionAuthenticationService;
+    }
     /**
      * Logout in Frontend
      *
@@ -14,11 +20,9 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        $response = HTTP::withToken(session('sanctum_token'))->timeout(60)->post(env('API_URL') . '/logout', 
+        $response = HTTP::withToken(session('logintoken'))->timeout(60)->post(env('API_URL') . '/logout', 
         []);
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        auth()->guard('web')->logout();
+        $this->sessionAuthenticationService->logout($request);
         return redirect('/')->with('message', $response->json('message')??'');
     }
     
@@ -34,7 +38,8 @@ class LoginController extends Controller
         ['email' => $request->email,
                 'password' => $request->password]);
         if(true !== $response->json('success')) return back()->withErrors([$response->json('message')]);
-        session(['sanctum_token' => $response->json('data')['token']]);
+        $request->token = $response->json('data');
+        $this->sessionAuthenticationService->login($request);
         return back()->with('message', $response->json('message')??'');
     }
 }

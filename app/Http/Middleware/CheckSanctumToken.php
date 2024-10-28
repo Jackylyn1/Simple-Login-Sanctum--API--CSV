@@ -17,7 +17,7 @@ class CheckSanctumToken
      */
     public function handle(Request $request, Closure $next):  Response | RedirectResponse
     {
-        if (!$request->session()->has('sanctum_token'))
+        if (!$request->session()->has('logintoken'))
             return response()->view('login');
         return $next($request);
     }

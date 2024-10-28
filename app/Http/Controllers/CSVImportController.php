@@ -22,7 +22,7 @@ class CSVImportController extends Controller
      * @return \Illuminate\Http\RedirectResponse;
     */
     public function upload(Request $request){
-        $response = HTTP::withToken(session('sanctum_token'))
+        $response = HTTP::withToken(session('logintoken'))
         ->attach(
             'csv_file', file_get_contents($request->file('csv_file')->getRealPath()), basename($request->file('csv_file')->getClientOriginalName())
         )

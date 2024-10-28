@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
+use App\Http\Services\ContactCSVHandlerService;
 use App\Http\Services\ResponseService;
 use Illuminate\Http\Request;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-use App\Models\Contact;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 class APICSVImportController extends Controller
 {
     protected $responseService;
-    public function __construct(ResponseService $responseService)
+    protected $contactCSVHandlerService;
+    public function __construct(ResponseService $responseService, ContactCSVHandlerService $contactCSVHandlerService)
     {
+        $this->contactCSVHandlerService = $contactCSVHandlerService;
         $this->responseService = $responseService;
     }
 
@@ -26,24 +27,8 @@ class APICSVImportController extends Controller
         $request->validate([
             'csv_file' => 'required|mimes:csv,txt|max:2048',
         ]);
-
-        try {
-            $spreadsheet = IOFactory::load($request->file('csv_file')->getPathname());
-            $data = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
-            $headers = array_shift($data);
-            foreach ($data as $csvrow) {
-                $mappedData = array_combine($headers, $csvrow);
-                $email = strtolower(trim($mappedData['email']??''));
-                Contact::updateOrCreate(['email' => $email], [
-                    'company_name' => $mappedData['companyname'] ?? '',
-                    'first_name'   => $mappedData['firstname'] ?? '',
-                    'last_name'    => $mappedData['lastname'] ?? '',
-                    'phone_number' => $mappedData['phonenumber'] ?? '',
-                ]);
-            }
-            return $this->responseService->sendResponse('CSV imported successfully.',[]);
-        } catch (\Exception $e) {
+        if(($e = $this->contactCSVHandlerService->upload($request)) instanceof \Exception )    
             return $this->responseService->sendError('Error importing CSV: ' . $e->getMessage());
-        }
+        return $this->responseService->sendResponse('CSV imported successfully.',[]);
     }   
 }

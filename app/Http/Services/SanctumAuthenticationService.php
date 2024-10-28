@@ -3,7 +3,8 @@ namespace App\Http\Services;
 use Laravel\Sanctum\PersonalAccessToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-class SanctumAuthenticationService {
+use App\Http\Contracts\AuthentificationInterface;
+class SanctumAuthenticationService implements AuthentificationInterface {
 
     /**
      * Get Access-Token
