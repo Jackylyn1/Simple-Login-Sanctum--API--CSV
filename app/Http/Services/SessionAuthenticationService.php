@@ -13,8 +13,11 @@ class SessionAuthenticationService implements AuthentificationInterface {
      */
     public function login(Request $request): bool
     {
-        session('logintoken', $request->token);
-        return true;
+        session(['logintoken' => $request->data['token']]);
+        if(session('logintoken')){
+            return true;
+        }
+        return false;
     }
 
     /**

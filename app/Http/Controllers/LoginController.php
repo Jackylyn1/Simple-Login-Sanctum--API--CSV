@@ -38,7 +38,7 @@ class LoginController extends Controller
         ['email' => $request->email,
                 'password' => $request->password]);
         if(true !== $response->json('success')) return back()->withErrors([$response->json('message')]);
-        $request->token = $response->json('data');
+        $request->data = $response->json('data');
         $this->sessionAuthenticationService->login($request);
         return back()->with('message', $response->json('message')??'');
     }
