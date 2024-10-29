@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\RedirectResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 /**
  * Middleware to check for a Sanctum authentication token in the session.
  *
@@ -20,9 +21,9 @@ class CheckSanctumToken
      *
      * @param \Illuminate\Http\Request $request The HTTP request instance.
      * @param \Closure $next The next middleware to call.
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse Redirects to login view if token is missing, otherwise proceeds with the request.
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse Redirects to login view if token is missing, otherwise proceeds with the request.
      */
-    public function handle(Request $request, Closure $next): Response | RedirectResponse
+    public function handle(Request $request, Closure $next): Response | RedirectResponse | BinaryFileResponse
     {
         if (!$request->session()->has('logintoken')) {
             return response()->view('login');

@@ -28,19 +28,24 @@
                                     href="{{ route('home') }}"
                                     class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                 >
-                                Home
+                                    Home
                                 </a>
                                 <a
                                     href="{{ route('import.csv.form') }}"
                                     class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                 >
-                                CSV-Import
+                                    CSV-Import
                                 </a>
                                 <a
                                     href="{{ route('logout') }}"
                                     class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                 >
-                                Log out
+                                    Log out
+                                </a>
+                                <a href="{{ route('documentation') }}/" 
+                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                >
+                                    Documentation
                                 </a>
                             </nav>
                         @endif

@@ -45,6 +45,8 @@ To run the Application we recommend your host supports:
 #### for phpdocs (optional)
 1. run "docker run --rm -v "[bind-mount-point]:/data" "phpdoc/phpdoc:3"
 2. run "phpdoc run -d . -t ./storage/phpdocs" in container
+3. run "php artisan storage:link" in container
+4. run "chmod -R 755 storage/phpdocs"
 
 ### Testing ###
 1. run php artisan migrate
