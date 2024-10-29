@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
  * before allowing the request to proceed. If the token is missing, 
  * it redirects the user to the login page.
  */
-class CheckSanctumToken
+class CheckLoginToken
 {
     /**
      * Handle an incoming request and check for a login token in the session.

@@ -4,7 +4,7 @@
 This project is: a showcase of ideas, a playground, and a gathering point for new technologies. Here, I’m experimenting, tinkering, and more. There’s no fixed development goal—feel free to throw ideas, feedback, and anything else my way!
 
 To-Do
-- rename checksanctumtoken to check logintoken
+- install pipeline and a showcase Version in Github
 - add more validators
 - add automated tests
 - add registration
@@ -54,5 +54,5 @@ To run the Application we recommend your host supports:
 3. get password of seeded user from laravel.log there will be an entry, which looks like "local.INFO: Password for [...]"
 4. you can use the .csv files inside testdata/ to have an example of the needed structure
 
-### additional infos ###
+### additional information ###
 1. I know that curl-requests are incredibly slow sometimes, I used them because one of my goals was to use Laravel

@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'check.sanctum.token' => \App\Http\Middleware\CheckSanctumToken::class,
+            'check.sanctum.token' => \App\Http\Middleware\CheckLoginToken::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
